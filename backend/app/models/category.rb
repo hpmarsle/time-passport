@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-    has_many: :timers
+    has_many :timers
 end
