@@ -1,13 +1,16 @@
 class Api::V1::TimersController < ApplicationController
     def index 
-        @timers = Timer.all
+        timers = Timer.all
         
-        render json: @timers #fast_json for serializer
+        render json: TimerSerializer.new(timers)
     end
 
     def show
-        @timer = Timer.find_by(id: params[:id])
-        render json: @timers #fast_json for serializer
+        timer = Timer.find_by(id: params[:id])
+        options = {
+            include: [:category]
+        }
+        render json: TimerSerializer.new(timer, options)
 
     end
 
