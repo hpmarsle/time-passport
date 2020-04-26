@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <title>Timers App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Time Passport</h1>
+        <p>Where does the time go? We make time for what's important to us or for where our habits have taken us. Use this app to document how you spend your time and see where it goes.</p>
+       <div id="new-timer-container">
+            <form id="new-timer-form">
+                <label for="date">Date</label>
+                <input class="new-timer" type="text" name="date">
+                <label for="name">Name</label>
+                <input class='new-timer' type="text" name="name">
+                <label for="category">Category</label>
+                <input class='new-timer' type="text" name="category">
+                <input type ="submit">
+            </form>
+        </div>
+        <div id="timers-container">
+        
+        </div>
+    </div>
+    <script src="src/components/app.js"></script>
+    <script src="src/components/timers.js"></script>
+    <script src="src/components/timer.js"></script>
+    <script src="src/adapters/TimersAdapter.js"></script>
+    <script src="src/index.js"></script>
+</body>
+</html>
