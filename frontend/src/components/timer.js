@@ -1,11 +1,10 @@
 class Timer {
-    constructor(timerJSON) {
-        this.id = timerJSON.id
-        this.name = timerJSON.attributes.name;
-        this.date = timerJSON.attributes.date;
-        this.elapsed_time = timerJSON.attributes.elapsed_time;
-        this.category = timerJSON.attributes.category.name;
-        this.category_color = timerJSON.attributes.category.key_color;
+    constructor(timer) {
+        this.id = timer.id
+        this.name = timer.attributes.name;
+        this.date = time.attributes.date;
+        this.elapsed_time = timer.attributes.elapsed_time;
+        this.category = timer.attributes.category;
     }
 
     renderTimer(){
