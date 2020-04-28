@@ -16,12 +16,12 @@ class Api::V1::TimersController < ApplicationController
 
     def create 
         @timer = Timer.create(timer_params)
-
+        render json: @timer 
     end
 
     private 
 
     def timer_params
-        params.require(:timer).permit(:name, :date, :time_elapsed)
+        params.require(:timer).permit(:name, :date, :elapsed_time, :category_id)
     end
 end
