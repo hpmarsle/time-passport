@@ -2,73 +2,78 @@ class Timers {
     constructor() {
         this.timers = [];
         this.adapter = new TimersAdapter();
-        this.initBindingsAndEventListeners();
-        this.fetchAndLoadTimers()
+        this.initBindings();
+        this.fetchAndLoadTimers();
+        this.loadEventListeners();
     }
 
-    initBindingsAndEventListeners(){
+    initBindings() {
 
         this.timersContainer = document.getElementById("timers-container") 
         this.newTimerForm = document.getElementById('new-timer-form')
-        this.newTimerInputs = document.getElementsByClassName('new-timer')
-        this.newTimerForm.addEventListener('submit', this.createTimer.bind(this))
-
+        this.timerDisplays = document.querySelectorAll('.timer-display')
+        this.stopperButtons = document.querySelectorAll('.stopper')
         
     }
 
-    createTimer(e) {
-        e.preventDefault()
-        for(let i=0; i < this.newTimerInputs.length; i++){
-            console.log(this.newTimerInputs[i].value)
-        }
-        console.log('note is being created')
+    loadEventListeners() {
+        this.newTimerForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            this.createTimer(e.target)
+        })
+        /*
+        this.timerDisplays.addEventListener('click', e => console.log('clicked!')) 
+        when start button is clicked change display of timer to count up set interval 1000 */
+        ``
     }
+        
+    
+    createTimer(form) {
+        let configObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                
+                "date": form[0].value,
+                "name": form[1].value,
+                "elapsed_time": "00:00:00",
+                "category": form[2].value
+            
+            })
+        }
 
+        this.adapter.postNewTimer(configObj)
+        .then(resp =>  {
+            console.log('success')
+            return resp.json()
+        })
+        .then(timer => {
+            let newTimer = new Timer(timer.data)
+            this.timersContainer.appendChild(newTimer.renderTimer())
+        })
+        .catch(err => {throw err})
+    
+
+        
+        
+    }
+    
     fetchAndLoadTimers() {
         this.adapter.getTimers()
         .then(timers => {
             timers["data"].forEach(timer => {
                 this.timers.push(new Timer(timer)) 
-                // console.log(timer)
             })
         })
-        .then(()=> {
-            this.render()
+        .then(() => {
+            this.makeTimerCards()
         })
     }
 
-    render() {
-        console.log("adding timers to DOM")
-        this.makeTimerDivs()
-        /*
-        1. set inner html OR some kind of function to make each timer in this.timers and append to container
-
-        append each to timer container 
-
-        this.timersContainer.appendChild()
-        */
-        // }) 
-            // console.log(timer.name, timer.category.name))
-        // console.log('timers loaded: ', this.timers)
-        
-        /*
-        <div class='timer-card'>
-            <ul>
-                <li>timer.name</li>
-                <li>timer.elapsed_time</li>
-                <li>timer.category</li>
-                <li>timer.category_color</li>
-            </ul>
-        </div>
-        <div class='timer-card'>
-
-        </div>
-        <div class='timer-card'>
-
-        </div> etc.. 
-        */
-    }
-    makeTimerDivs(){
+    makeTimerCards(){
         
         this.timers.forEach(timer => this.timersContainer.appendChild(timer.renderTimer()))
 
