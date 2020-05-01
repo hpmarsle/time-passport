@@ -13,18 +13,30 @@
         <h1>Time Passport</h1>
         <p>Where does the time go? We make time for what's important to us or for where our habits have taken us. Use this app to document how you spend your time and see where it goes.</p>
        <div id="new-timer-container">
-            <form id="new-timer-form">
+           <h3>Create a New Timer Here:</h3>
+            
+           <form id="new-timer-form">
                 <label for="date">Date</label>
-                <input class="new-timer" type="text" name="date">
+                <input type="text" name="date">
+
                 <label for="name">Name</label>
-                <input class='new-timer' type="text" name="name">
-                <label for="category">Category</label>
-                <input class='new-timer' type="text" name="category">
+                <input type="text" name="name">
+
+                <label for="categories">Choose a category: </label>
+                <select id="categories">
+                    <option disabled selected>Select</option>
+                    <option>Work</option>
+                    <option>Leisure</option>
+                    <option>Health</option>
+                </select>
+
                 <input type ="submit">
             </form>
+
         </div>
+        <h3>My Timers</h3>
         <div id="timers-container">
-        
+            
         </div>
     </div>
     <script src="src/components/app.js"></script>
