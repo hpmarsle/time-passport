@@ -20,6 +20,11 @@ class Api::V1::TimersController < ApplicationController
         render json: TimerSerializer.new(timer)
     end
 
+    def destroy
+        timer = Timer.find_by(id: params[:id]).destroy
+        render json: TimerSerializer.new(timer)
+    end
+
     private 
 
     def timer_params
