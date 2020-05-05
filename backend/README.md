@@ -1,24 +1,15 @@
-# README
+# Time Passport README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a beginning stages Single Page Application. Written with a Javascript frontend and Rails backend as an API.
 
-Things you may want to cover:
+The Time Passport web app is for:
+* The Optimizer that wants a dashboard of where they spend their time most, so they can reallocate as needed
+* The Quarantiner that does not know what day it is
+* The Procrastinator wanting to take back control of their life 
+* The Multitasker that needs multiple timers going
+* Anyone else that wants a snapshot of how they are spending the time in their life.
 
-* Ruby version
+Fork & Clone
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run rails server (rails s) from inside back end folder.
+Run open index.html from inside front end folder.
