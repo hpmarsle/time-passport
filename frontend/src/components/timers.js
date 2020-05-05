@@ -31,12 +31,14 @@ class Timers {
 
         this.adapter.postNewTimer(configObj)
         .then(resp =>  {
-            console.log('success')
             return resp.json()
         })
         .then(timer => {
             let newTimer = new Timer(timer.data)
             this.timersContainer.appendChild(newTimer.renderTimer())
+        })
+        .then(() => {
+            this.loadEventListeners()
         })
         .catch(err => {throw err})     
     }
@@ -54,13 +56,7 @@ class Timers {
             this.loadEventListeners()
         })
     }
-
-    deleteTimer(id) {
-        fetch(`${this.adapter.baseUrl}/${id}`, {
-            method: 'DELETE'
-        })
-    }
-
+  
     makeTimerCards(){
         this.timers.forEach(timer => this.timersContainer.appendChild(timer.renderTimer()))
     }
@@ -70,6 +66,7 @@ class Timers {
         this.newTimerForm.addEventListener('submit', (e) => {
             e.preventDefault()
             this.createTimer(e.target)
+            e.target.reset()
         })
         this.timerDisplays = document.querySelectorAll(".timer-display")
         this.stopperButtons = document.getElementsByClassName('stopper');
@@ -79,7 +76,7 @@ class Timers {
         for (const d of this.deleteButtons) {
             d.addEventListener('click', e => {
                 const timerCard = e.target.parentElement.parentElement
-                this.deleteTimer(timerCard.id)
+                this.adapter.deleteTimer(timerCard.id)
                 timerCard.remove();
             })
 

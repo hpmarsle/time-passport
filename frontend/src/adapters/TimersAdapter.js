@@ -13,4 +13,9 @@ class TimersAdapter{
         return fetch(this.baseUrl, options)
     }
    
+    deleteTimer(id){
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'DELETE'
+        })
+    }
 }
